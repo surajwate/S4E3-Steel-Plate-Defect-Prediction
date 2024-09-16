@@ -130,7 +130,3 @@ The best model, `CatBoost`, was selected for submission after training on the en
 
 - **Notebook**: [Kaggle Notebook for S4E3](https://www.kaggle.com/code/surajwate/s4e3-streel-plate-defect)
 - **Blog Post**: [Steel Plate Defect Prediction](https://surajwate.com/blog/steel-plate-defect-prediction/)
-
----
-
-This README file outlines the project structure, how to use the project, key details of the models and results, as well as links to the notebook and blog for further insights.
