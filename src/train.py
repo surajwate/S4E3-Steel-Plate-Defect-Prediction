@@ -6,6 +6,7 @@ from sklearn.metrics import roc_auc_score
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from feature_engineering import FeatureEngineer
+from sklearn.preprocessing import PolynomialFeatures
 
 import os
 import argparse
@@ -35,11 +36,14 @@ def run(fold, model):
     # Split the data into features and target
     target_features = ['Pastry', 'Z_Scratch', 'K_Scatch', 'Stains', 'Dirtiness', 'Bumps', 'Other_Faults']
 
-    X_train = train.drop(['id', 'kfold', 'Pastry', 'Z_Scratch', 'K_Scatch', 'Stains', 'Dirtiness', 'Bumps', 'Other_Faults'], axis=1)
-    X_test = test.drop(['id', 'kfold', 'Pastry', 'Z_Scratch', 'K_Scatch', 'Stains', 'Dirtiness', 'Bumps', 'Other_Faults'], axis=1)
+    X_train = train.drop(['id', 'kfold'] + target_features, axis=1)
+    X_test = test.drop(['id', 'kfold'] + target_features, axis=1)
 
     y_train = train[target_features].values
     y_test = test[target_features].values
+
+    # Add Polynomial Features to pipeline
+    poly = PolynomialFeatures(degree=2, interaction_only=True, include_bias=False)
 
     # Define features
     features = X_train.columns
